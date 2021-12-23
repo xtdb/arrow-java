@@ -15,31 +15,31 @@
  * limitations under the License.
  */
 
-package org.apache.arrow.flight.example.integration;
+package org.apache.arrow.flight.sql.util;
 
-import org.apache.arrow.flight.FlightClient;
-import org.apache.arrow.flight.FlightProducer;
-import org.apache.arrow.flight.FlightServer;
-import org.apache.arrow.flight.Location;
-import org.apache.arrow.memory.BufferAllocator;
+import com.google.protobuf.Descriptors.EnumDescriptor;
+import com.google.protobuf.Descriptors.EnumValueDescriptor;
+import com.google.protobuf.ProtocolMessageEnum;
 
-/**
- * A particular scenario in integration testing.
- */
-interface Scenario {
+enum AdhocTestOption implements ProtocolMessageEnum {
+  OPTION_A, OPTION_B, OPTION_C;
 
-  /**
-   * Construct the FlightProducer for a server in this scenario.
-   */
-  FlightProducer producer(BufferAllocator allocator, Location location) throws Exception;
+  @Override
+  public int getNumber() {
+    return ordinal();
+  }
 
-  /**
-   * Set any other server options.
-   */
-  void buildServer(FlightServer.Builder builder) throws Exception;
+  @Override
+  public EnumValueDescriptor getValueDescriptor() {
+    throw getUnsupportedException();
+  }
 
-  /**
-   * Run as the client in the scenario.
-   */
-  void client(BufferAllocator allocator, Location location, FlightClient client) throws Exception;
+  @Override
+  public EnumDescriptor getDescriptorForType() {
+    throw getUnsupportedException();
+  }
+
+  private UnsupportedOperationException getUnsupportedException() {
+    return new UnsupportedOperationException("Unimplemented method is irrelevant for the scope of this test.");
+  }
 }
