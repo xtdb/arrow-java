@@ -38,7 +38,7 @@ env:
 
 jobs:
   ubuntu:
-    name: AMD64 Ubuntu 22.04 JDK ${{ matrix.jdk }} Maven ${{ matrix.maven }}
+    name: AMD64 ${{ matrix.name }} JDK ${{ matrix.jdk }} Maven ${{ matrix.maven }}
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.pull_request.title, 'WIP') }}
     timeout-minutes: 30
@@ -46,8 +46,13 @@ jobs:
       fail-fast: false
       matrix:
         jdk: [11, 17, 21, 22]
-        maven: [3.9.6]
-        image: [java]
+        maven: [3.9.9]
+        image: [ubuntu, conda-jni-cdata]
+        include:
+          - image: ubuntu
+            name: "Ubuntu"
+          - image: conda-jni-cdata
+            name: "Conda JNI"
     env:
       JDK: ${{ matrix.jdk }}
       MAVEN: ${{ matrix.maven }}
