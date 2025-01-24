@@ -38,7 +38,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 /** Benchmarks for {@link BaseVariableWidthVector}. */
 @State(Scope.Benchmark)
-public class VariableWidthVectorBenchmarks {
+public class VariableWidthVectorInlineValueBenchmarks {
   // checkstyle:off: MissingJavadocMethod
 
   private static final int VECTOR_CAPACITY = 16 * 1024;
@@ -47,7 +47,7 @@ public class VariableWidthVectorBenchmarks {
 
   private static final int ALLOCATOR_CAPACITY = 1024 * 1024;
 
-  private static byte[] bytes = VariableWidthVectorBenchmarkConstants.LONG_VALUE.getBytes();
+  private static final byte[] bytes = VariableWidthVectorBenchmarkConstants.SHORT_VALUE.getBytes();
   private ArrowBuf arrowBuff;
 
   private BufferAllocator allocator;
@@ -120,7 +120,7 @@ public class VariableWidthVectorBenchmarks {
   public static void main(String[] args) throws RunnerException {
     Options opt =
         new OptionsBuilder()
-            .include(VariableWidthVectorBenchmarks.class.getSimpleName())
+            .include(VariableWidthVectorInlineValueBenchmarks.class.getSimpleName())
             .forks(1)
             .build();
 
