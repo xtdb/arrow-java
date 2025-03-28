@@ -108,7 +108,7 @@ under the License.
     <forkCount>2</forkCount>
     <checkstyle.version>10.21.4</checkstyle.version>
     <checkstyle.failOnViolation>true</checkstyle.failOnViolation>
-    <error_prone_core.version>2.31.0</error_prone_core.version>
+    <error_prone_core.version>2.37.0</error_prone_core.version>
     <checker.framework.version>3.49.1</checker.framework.version>
     <logback.version>1.5.18</logback.version>
     <doclint>none</doclint>
@@ -845,6 +845,7 @@ under the License.
       -->
       <id>error-prone</id>
       <activation>
+        <jdk>[17,)</jdk>
         <property>
           <name>!m2e.version</name>
         </property>
@@ -868,6 +869,7 @@ under the License.
                 <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
                 <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
                 <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+                <arg>--should-stop=ifError=FLOW</arg>
               </compilerArgs>
               <annotationProcessorPaths combine.children="append">
                 <path>
