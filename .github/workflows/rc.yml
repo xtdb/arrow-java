@@ -261,11 +261,6 @@ jobs:
           # bundled Protobuf.
           brew uninstall protobuf
 
-          # We need Flatbuffers 24, not the latest version
-          # Homebrew does not offer older versions, so remove the Homebrew
-          # package and rely on Arrow using a bundled version instead
-          brew uninstall flatbuffers
-
           brew bundle --file=Brewfile
       - name: Prepare ccache
         run: |
